@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:calculator/widgets/cal_button.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String operation = "";
 
   void myButtonOntap(String myButtonValue) {
-    print(myButtonValue);
+    log(myButtonValue.toString());
 
     if (myButtonValue == "C") {
       textToDisplay = "";
@@ -89,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         history =
             firstNum.toString() + operation.toString() + secondNum.toString();
       } else {
-        tempResult = int.parse(textToDisplay + myButtonValue).toString();
+        tempResult = textToDisplay + myButtonValue;
       }
       setState(() {
         textToDisplay = tempResult;
@@ -119,7 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          tempResult,
+                          "12x4"
+                          // history
+                          ,
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 28,
@@ -131,7 +135,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          history,
+                          "48"
+                          //textToDisplay
+                          ,
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 56,
