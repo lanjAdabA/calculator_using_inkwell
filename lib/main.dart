@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:calculator/widgets/cal_button.dart';
+import 'package:calculator/cal_button.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,70 +33,70 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int firstNum = 0;
-  int secondNum = 0;
+  double firstNum = 0;
+  double secondNum = 0;
   String history = "";
   String textToDisplay = "";
   String tempResult = "";
   String operation = "";
 
   void myButtonOntap(String myButtonValue) {
-    log(myButtonValue.toString());
-
-    if (myButtonValue == "C") {
-      textToDisplay = "";
+    if (myButtonValue == 'C') {
+      textToDisplay = '';
       firstNum = 0;
       secondNum = 0;
-      tempResult = "";
-    } else if (myButtonValue == "AC") {
-      textToDisplay = "";
+      tempResult = '';
+    } else if (myButtonValue == 'AC') {
+      textToDisplay = '';
       firstNum = 0;
       secondNum = 0;
-      tempResult = "";
-      history == "";
-    } else if (myButtonValue == "+/-") {
-      if (textToDisplay[0] != "-") {
-        tempResult = "-$textToDisplay";
+      tempResult = '';
+      history = '';
+    } else if (myButtonValue == '+/-') {
+      if (textToDisplay[0] != '-') {
+        tempResult = '-$textToDisplay';
       } else {
         tempResult = textToDisplay.substring(1);
       }
-    } else if (myButtonValue == "del.") {
+    } else if (myButtonValue == 'del.') {
       tempResult = textToDisplay.substring(0, textToDisplay.length - 1);
-    } else if (myButtonValue == "+" ||
-        myButtonValue == "-" ||
-        myButtonValue == "x" ||
-        myButtonValue == "÷") {
-      firstNum = int.parse(textToDisplay);
-      tempResult = "";
+    } else if (myButtonValue == '+' ||
+        myButtonValue == '-' ||
+        myButtonValue == 'x' ||
+        myButtonValue == '÷') {
+      firstNum = double.parse(textToDisplay);
+      tempResult = textToDisplay + myButtonValue;
       operation = myButtonValue;
-    } else if (myButtonValue == "=") {
-      secondNum = int.parse(textToDisplay);
-      if (operation == "+") {
+      tempResult = '';
+    } else if (myButtonValue == '=') {
+      secondNum = double.parse(textToDisplay);
+      if (operation == '+') {
         tempResult = (firstNum + secondNum).toString();
         history =
             firstNum.toString() + operation.toString() + secondNum.toString();
       }
-      if (operation == "-") {
+      if (operation == '-') {
         tempResult = (firstNum - secondNum).toString();
         history =
             firstNum.toString() + operation.toString() + secondNum.toString();
       }
-      if (operation == "x") {
+      if (operation == 'x') {
         tempResult = (firstNum * secondNum).toString();
         history =
             firstNum.toString() + operation.toString() + secondNum.toString();
       }
-      if (operation == "÷") {
+      if (operation == '÷') {
         tempResult = (firstNum / secondNum).toString();
         history =
             firstNum.toString() + operation.toString() + secondNum.toString();
-      } else {
-        tempResult = textToDisplay + myButtonValue;
       }
-      setState(() {
-        textToDisplay = tempResult;
-      });
+    } else {
+      tempResult = textToDisplay + myButtonValue;
+      log(tempResult);
     }
+    setState(() {
+      textToDisplay = tempResult;
+    });
   }
 
   @override
@@ -121,9 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "12x4"
-                          // history
-                          ,
+                          history,
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 28,
@@ -135,9 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "48"
-                          //textToDisplay
-                          ,
+                          textToDisplay,
                           style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 56,
